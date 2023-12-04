@@ -1,4 +1,4 @@
-package model;
+package by.learningvoyage.model;
 
 
 import lombok.AllArgsConstructor;
@@ -32,5 +32,5 @@ public class Card {
     @Valid
     @Min(value = 1)
     @Max(value = 4)
-    private Integer correctAnswerID;
+    private Integer correctAnswerId;
 }

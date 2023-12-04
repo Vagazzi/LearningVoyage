@@ -1,4 +1,5 @@
-package model;
+package by.learningvoyage.model;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,22 +10,24 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "subcategories")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Category {
+public class Subcategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     private String name;
     private String description;
 
-    @OneToMany
-    private List<Subcategory> subcategories;
+    private String accessLevel;
 
+    @OneToMany
+    private List<Card> cards;
 }
