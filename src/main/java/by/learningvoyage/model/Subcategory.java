@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,10 @@ public class Subcategory {
 
     private String name;
     private String description;
+
+
+    @Lob
+    private Blob subCategoryPicture;
 
     private String accessLevel;
 
