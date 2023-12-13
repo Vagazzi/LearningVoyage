@@ -47,17 +47,16 @@ public class CardConstructorController {
     public String saveCategory(@RequestParam("categoryName") String categoryName,
                                @RequestParam("categoryDescription") String categoryDescription,
                                @RequestParam("categoryPicture") MultipartFile categoryPicture) throws SQLException, IOException {
-        System.out.println("it will be nice if you see this into your stack trace");
 
         Category category = new Category();
 
-        category.setName(categoryName);
-        category.setDescription(categoryDescription);
+        category.setCategoryName(categoryName);
+        category.setCategoryDescription(categoryDescription);
         category.setCategoryPicture(categoryService.castToBlobs(categoryPicture));
 
         categoryService.create(category);
 
-        return "redirect:/";
+        return "redirect:/constructor";
 
     }
 }

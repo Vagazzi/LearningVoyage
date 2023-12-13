@@ -22,8 +22,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String description;
+    private String categoryName;
+    private String categoryDescription;
 
     @Lob
     private Blob categoryPicture;

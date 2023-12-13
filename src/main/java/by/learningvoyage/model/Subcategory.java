@@ -24,12 +24,12 @@ public class Subcategory {
     private Long id;
 
 
-    private String name;
-    private String description;
+    private String subcategoryName;
+    private String subcategoryDescription;
 
 
     @Lob
-    private Blob subCategoryPicture;
+    private Blob subcategoryPicture;
 
     private String accessLevel;
 
