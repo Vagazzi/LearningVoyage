@@ -11,4 +11,6 @@ public class LearningVoyageApplication {
         SpringApplication.run(LearningVoyageApplication.class, args);
     }
 
+
+
 }
