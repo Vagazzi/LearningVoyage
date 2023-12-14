@@ -17,6 +17,8 @@ public interface CategoryService {
 
     List<Category> getAllCategories();
 
+    Category save(Category category);
+
      Blob castToBlobs(MultipartFile object) throws SQLException, IOException;
 
     Category getById(long id);

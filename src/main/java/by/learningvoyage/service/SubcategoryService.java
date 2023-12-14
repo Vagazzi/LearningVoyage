@@ -18,4 +18,6 @@ public interface SubcategoryService {
 
     List<Subcategory> getAllSubcategories();
     Subcategory getById(long id);
+
+    Subcategory save(Subcategory subcategory);
 }

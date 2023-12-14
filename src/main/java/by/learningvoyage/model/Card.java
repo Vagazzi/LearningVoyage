@@ -29,8 +29,12 @@ public class Card {
     private String thirdAnswer;
     private String fourthAnswer;
 
+
+    @Transient
     @Valid
     @Min(value = 1)
     @Max(value = 4)
     private Integer correctAnswerId;
+
+    private String correctAnswer;
 }

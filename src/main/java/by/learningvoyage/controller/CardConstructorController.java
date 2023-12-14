@@ -27,12 +27,12 @@ public class CardConstructorController {
     public String showCardConstructor(Model model){
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "cardConstructor";
+        return "ShowAvailableForEditCategories";
     }
 
     @GetMapping("/constructor/create")
     public String showCreateMenu(){
-        return "createCardCategoryMenu";
+        return "ShowCreateCategoryPage";
     }
 
     @GetMapping("/display/categoryPicture")

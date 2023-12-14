@@ -105,7 +105,7 @@
         </div>
 
 
-        <form th:action="@{'/edit/category'(id=${id})}" method="post">
+        <form th:action="@{/edit/category/{id}(id=${id})}" method="post">
 
             <table class="table border">
                 <thead>
@@ -137,47 +137,6 @@
         </form>
     </div>
 
-
-    <!--
- <form action="/constructor/create" method="post" enctype="multipart/form-data">
-   <div class="input-group">
-     <p>
-       <input type="text" class="form-control" aria-describedby="inputGroupFileAddon04" required="required"
-              name="categoryName" id="categoryName" placeholder="Category name">
-     <p>
-       <input type="text" class="form-control" aria-describedby="inputGroupFileAddon04" required="required"
-              name="categoryDescription" id="categoryDescription" placeholder="Category description">
-     <p>
-       <input type="file" class="form-control" aria-describedby="inputGroupFileAddon04" required="required" aria-label="Upload"  placeholder="Category picture" name="categoryPicture" id="categoryPicture">
-     <p>
-       <button class="btn btn-outline-secondary" type="submit">Submit</button>
-   </div>
-     -->
-    <!--
-    <table class="table border" >
-      <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-
-      </tr>
-      </thead>
-
-
-      <tbody>
-      <tr th:each="list : ${candidateList}">
-          <td th:text="${list.getId()}"></td>
-          <td th:text="${list.getName()}"></td>
-          <td th:text="${list.getMiddleName()}"></td>
-          <td th:text="${list.getSurname()}"></td>
-          <td><img height="250px"  th:src="@{${'/display/photo?id=' + list.getId()}}" alt=""></td>
-          <td th:text="${list.getDescription()}"></td>
-          <td><img height="250px"   th:src="@{${'/display/cv?id=' + list.getId()}}" alt=""></td>
-      </tr>
-      </tbody>
-
-    </table>
-     -->
 </div>
 </div>
 
