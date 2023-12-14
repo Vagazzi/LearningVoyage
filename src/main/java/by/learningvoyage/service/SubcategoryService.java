@@ -1,6 +1,5 @@
 package by.learningvoyage.service;
 
-import by.learningvoyage.model.Category;
 import by.learningvoyage.model.Subcategory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +16,6 @@ public interface SubcategoryService {
 
     Blob castToBlobs(MultipartFile object) throws SQLException, IOException;
 
-    List<Subcategory> getAllCategories();
+    List<Subcategory> getAllSubcategories();
     Subcategory getById(long id);
 }

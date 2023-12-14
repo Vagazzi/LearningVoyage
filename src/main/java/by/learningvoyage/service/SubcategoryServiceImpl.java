@@ -38,7 +38,7 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     }
 
     @Override
-    public List<Subcategory> getAllCategories() {
+    public List<Subcategory> getAllSubcategories() {
         return  (List<Subcategory>) subcategoryRepository.findAll();
     }
 }

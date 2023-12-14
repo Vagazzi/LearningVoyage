@@ -73,7 +73,7 @@
 
         </style>
 
-       <a> You have selected
+        <a> You have selected
             <td th:text="${categoryName}"></td>
             category </a>
     </h1>
@@ -105,32 +105,33 @@
         </div>
 
 
-       <form th:action="@{'/edit/category'(id=${id})}"  method="post">
-           <table class="table border">
-               <thead>
-               <tr>
+        <form th:action="@{'/edit/category'(id=${id})}" method="post">
 
-                   <th scope="col">Name</th>
-                   <th scope="col">Description</th>
-                   <th scope="col">Subcategory Picture</th>
-                   <th scope="col">Select this subcategory</th>
-                   <th scope="col">Edit</th>
-               </tr>
-               </thead>
+            <table class="table border">
+                <thead>
+                <tr>
 
-               <tbody>
-               <tr th:each="list : ${subcategories}">
-                   <td th:text="${list.getSubcategoryName()}"></td>
-                   <td th:text="${list.getSubcategoryDescription()}"></td>
-                   <td><img height="250px" th:src="@{${'/display/subcategoryPicture?id=' + list.getId()}}" alt=""></td>
-                   <td><input class="form-check-input" type="checkbox" id="subcategoryCheckbox" name="subcategoryCheckbox"
-                              th:value="${list.getId()}"></td>
-                   <td hidden="hidden" th:text ="${list.getId()}"></td>
-                   <td><a th:href="@{'edit/subcategory'(id=${list.id})}">Edit</a></td>
-               </tr>
-               </tbody>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Subcategory Picture</th>
+                    <th scope="col">Select this subcategory</th>
+                    <th scope="col">Edit</th>
+                </tr>
+                </thead>
 
-           </table>
+                <tbody>
+                <tr th:each="list : ${subcategories}">
+                    <td th:text="${list.getSubcategoryName()}"></td>
+                    <td th:text="${list.getSubcategoryDescription()}"></td>
+                    <td><img height="250px" th:src="@{${'/display/subcategoryPicture?id=' + list.getId()}}" alt=""></td>
+                    <td><input class="form-check-input" type="checkbox" id="subcategoryCheckbox"
+                               name="subcategoryCheckbox"
+                               th:value="${list.getId()}"></td>
+                    <td><a th:href="@{'/subcategory/edit'(id=${list.id})}">Edit</a></td>
+                </tr>
+                </tbody>
+
+            </table>
 
             <button class="btn btn-outline-secondary" type="submit">Submit</button>
         </form>
