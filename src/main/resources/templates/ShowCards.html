@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Learning Voyage - application for learning</title>
@@ -40,13 +40,13 @@
                     <a class="nav-link" aria-current="page" href="/categories">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/constructor" aria-selected="true">Card constructor</a>
+                    <a class="nav-link" href="/constructor" aria-selected="true">Card constructor</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/courses">My profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About us</a>
+                    <a class="nav-link active" href="/tests">About us</a>
                 </li>
             </ul>
         </div>
@@ -54,11 +54,10 @@
 </nav>
 
 <div class="mt-5">
-    <h1 class="text-center">Available categories
+    <h1 class="text-center">
         <style>
             h1 {
                 color: #000;
-
                 font-feature-settings: 'clig' off, 'liga' off;
                 font-family: Newsreader;
                 font-size: 64px;
@@ -66,42 +65,77 @@
                 font-weight: 400;
                 line-height: 120%; /* 76.8px */
                 letter-spacing: -1.28px;
-
             }
-
         </style>
+        <a>
+            <td th:text="${cardQuestion}"></td>
+        </a>
+
     </h1>
-    <div class="container">
-        <div class="my-3">
-            <a href="/constructor/create">
-                <button type="button" class="btn btn-primary">Add card category</button>
+    <!--
+    <form th:action="@{/category/{categoryId}/subcategory/{subcategoryId}(categoryId=${categoryId},subcategoryId=${subcategoryId}})}" method="post">
+    -->
+
+    <form th:href="@{/category/{categoryId}/subcategory/{subcategoryId}(categoryId=${categoryId},subcategoryId=${subcategoryId})}"
+          method="post">
+        <div class="input-group">
+            <a>
+                <td th:text="${firstAnswer}"></td>
+                <label for="1st"></label><input type="checkbox" name="firstAnswer" id="1st" th:value="1">
             </a>
+
+            <a>
+                <td th:text="${secondAnswer}"></td>
+                <label for="2nd"></label><input type="checkbox" name="secondAnswer" id="2nd" th:value="2">
+            </a>
+            <a>
+                <td th:text="${thirdAnswer}"></td>
+                <label for="3rd"></label><input type="checkbox" name="thirdAnswer" id="3rd" th:value="3">
+            </a>
+            <a>
+                <td th:text="${fourthAnswer}"></td>
+                <label for="4th"></label><input type="checkbox" name="fourthAnswer" id="4th" th:value="4">
+            </a>
+            <button class="btn btn-outline-secondary" type="submit">Confirm</button>
         </div>
 
-        <table class="table border">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Category Picture</th>
-                <th scope="col">Edit</th>
-            </tr>
-            </thead>
+        <label>
+            <input type="checkbox" th:hidden="${message == 0 ? false: true}"/> <td th:text="${message}"></td>
+        </label>
+    </form>
 
-            <tbody>
-            <tr th:each="list : ${categories}">
-                <td th:text="${list.getCategoryName()}"></td>
-                <td th:text="${list.getCategoryDescription()}"></td>
-                <p>
+    <!--
+        <form th:action = "" method="post">
+
+
+        </form>
+    -->
+    <!--
+    <table class="table border">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category Picture</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="list : ${categories}">
+            <td th:text="${list.getCategoryName()}"></td>
+            <td th:text="${list.getCategoryDescription()}"></td>
+            <p>
                 <td><img height="250px" th:src="@{${'/display/categoryPicture?id=' + list.getId()}}" alt=""></td>
-                <p>
+            <p>
                 <td><a th:href="@{'edit/category'(id=${list.id})}">Edit</a></td>
-            </tr>
-            </tbody>
+        </tr>
+        </tbody>
 
-        </table>
+    </table>
+    -->
 
-    </div>
+</div>
 </div>
 
 <!--Bootstrap JS -->
