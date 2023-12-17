@@ -53,7 +53,7 @@ public class CategoryController {
     @PostMapping("/edit/category/{id}")
     public String addSubcategories(@PathVariable("id") long id,
                                    @RequestParam("subcategoryCheckbox") List<String> subcategoriesId) {
-        List<Long> subcategoryIds = subcategoriesId.stream().map(Long::parseLong).collect(Collectors.toList());
+        List<Long> subcategoryIds = subcategoriesId.stream().map(Long::parseLong).toList();
         List<Subcategory> subcategories = new ArrayList<>();
 
         for (Long subcategoryId : subcategoryIds) {

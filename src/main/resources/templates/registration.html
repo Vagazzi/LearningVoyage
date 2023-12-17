@@ -1,15 +1,46 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <title>Add new user </title>
+    <meta charset="utf-8">
+    <title>Регистрация</title>
 </head>
-<body>
-Add new user
 
-<form action="/registration" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <button class="btn btn-outline-secondary" type="submit" >Submit</button>
-</form>
+<body>
+<div>
+    <form method="POST" action="/registration" enctype="multipart/form-data">
+        <h2>Регистрация</h2>
+        <div>
+            <input type="text" id="name" placeholder="Name"
+                   autofocus="true" name="login">
+        </div>
+        <div>
+            <input type="text" id="surname" placeholder="Surname"
+                   autofocus="true" name="login">
+        </div>
+
+        <div>
+            <input type="text" id="login" placeholder="Username"
+                   autofocus="true" name="login">
+        </div>
+        <div>
+            <input type="password" id="password" name="password" placeholder="Password">
+        </div>
+        <div>
+            <input type="password" name="confirmPassword" id="confirmPassword"
+                   placeholder="Confirm your password">
+        </div>
+
+        <p>
+            <label>Avatar</label>
+            <input type="file" class="form-control" aria-describedby="inputGroupFileAddon04" required="required"
+                   aria-label="Upload" placeholder="Category picture" name="avatar" id="avatar">
+        <p>
+
+            <button type="submit">Зарегистрироваться</button>
+        <form>
+            <a href="/">Главная</a>
+        </form>
+    </form>
+</div>
 </body>
 </html>

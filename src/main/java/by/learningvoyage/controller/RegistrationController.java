@@ -3,37 +3,53 @@ package by.learningvoyage.controller;
 
 import by.learningvoyage.model.Roles;
 import by.learningvoyage.model.User;
-import by.learningvoyage.repository.UserRepository;
+import by.learningvoyage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.Map;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Set;
 
 @Controller
 public class RegistrationController {
     @Autowired
-    private UserRepository userRepo;
+    private UserService userService;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @GetMapping("/registration")
-    public String registration() {
+    public String registration(Model model) {
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Map<String, Object> model) {
-//        System.out.printf("deb");
-        User userFromDb = userRepo.findByLogin(user.getLogin());
+    public String addUser(@RequestParam("login") String login,
+                          @RequestParam("password") String password,
+                          @RequestParam("avatar") MultipartFile avatar,
+                          Model model) throws SQLException, IOException {
 
-        if (userFromDb != null) {
-            model.put("message", "User exists!");
+
+        User user = new User();
+
+        user.setLogin(login);
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        user.setRoles(Set.of(new Roles(1L,Roles.DEFAULT_USER)));
+        user.setAvatar(userService.castToBlobs(avatar));
+
+        if(!userService.saveUser(user)){
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
 
-        user.setRole(Collections.singleton(Roles.DEFAULT_USER));
-        userRepo.save(user);
         return "redirect:/";
     }
 }
