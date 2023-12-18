@@ -34,10 +34,6 @@ public class Roles implements GrantedAuthority {
 
     }
 
-    public Roles(String defaultUser) {
-        this.name = defaultUser;
-    }
-
     @Override
     public String getAuthority() {
         return getName();

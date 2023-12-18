@@ -11,11 +11,11 @@
         <h2>Регистрация</h2>
         <div>
             <input type="text" id="name" placeholder="Name"
-                   autofocus="true" name="login">
+                   autofocus="true" name="name">
         </div>
         <div>
             <input type="text" id="surname" placeholder="Surname"
-                   autofocus="true" name="login">
+                   autofocus="true" name="surname">
         </div>
 
         <div>
@@ -38,6 +38,12 @@
 
             <button type="submit">Зарегистрироваться</button>
         <form>
+            <label>
+                <label>
+                    <td th:hidden="${usernameError == 0 ? false: true}"></td>
+                    <label th:text="${usernameError}"></td></label>
+                </label>
+            </label>
             <a href="/">Главная</a>
         </form>
     </form>

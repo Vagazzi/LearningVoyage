@@ -36,9 +36,7 @@ public class UserService implements UserDetailsService {
     private RolesRepository rolesRepository;
 
 
-    public User create(User user) {
-        return userRepository.save(user);
-    }
+
 
 
     public User getById(long id) {
@@ -46,7 +44,8 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public Blob castToBlobs(MultipartFile object) throws IOException, SQLException {
+
+    public Blob castToBlobs(MultipartFile object) throws SQLException, IOException {
 
         byte[] photoBytes = object.getBytes();
         return new javax.sql.rowset.serial.SerialBlob(photoBytes);

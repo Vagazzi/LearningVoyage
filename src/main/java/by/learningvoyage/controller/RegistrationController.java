@@ -25,7 +25,6 @@ public class RegistrationController {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     @GetMapping("/registration")
     public String registration(Model model) {
         return "registration";

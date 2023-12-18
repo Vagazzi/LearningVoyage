@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories">Categories</a>
+                    <a class="nav-link" aria-current="page" href="/categories">Categories</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="/constructor" aria-selected="true">Card constructor</a>
@@ -58,10 +58,8 @@
     </div>
 </nav>
 
-<!-- View Images -->
-<!--Main Content-->
 <div class="mt-5">
-    <h1 class="text-center">
+    <h1 class="text-center">Profile info
         <style>
             h1 {
                 color: #000;
@@ -77,80 +75,20 @@
             }
 
         </style>
-
-        <a> You have selected
-            <td th:text="${subcategoryName}"></td>
-            subcategory </a>
     </h1>
-    <h1 class="text-center"> Available cards
-        <style>
-            h1 {
-                color: #000;
-
-                font-feature-settings: 'clig' off, 'liga' off;
-                font-family: Newsreader;
-                font-size: 64px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 120%; /* 76.8px */
-                letter-spacing: -1.28px;
-
-            }
-
-        </style>
-
-    </h1>
-
     <div class="container">
-
-        <div class="my-3">
-            <a href="/create/card">
-                <button type="button" class="btn btn-primary">Add a card</button>
+        <label th:text="${user.getName()}"> </label>
+        <label th:text="${user.getSurname()}"></label>
+        <label th:text="${user.getLogin()}"></label>
+        <div>
+            <img height="50px" th:src="@{${'/display/avatar'}}" alt="">
+        </div>
+        <div>
+            <a href="/profile/">
+                <button class="btn btn-outline-secondary" type="submit" >Edit info</button>
             </a>
         </div>
-
-
-        <form th:action="@{/subcategory/edit/{id}(id=${id})}" method="post">
-
-            <table class="table border">
-                <thead>
-                <tr>
-
-                    <th scope="col">Question</th>
-                    <th scope="col">First answer</th>
-                    <th scope="col">Second answer</th>
-                    <th scope="col">Third answer</th>
-                    <th scope="col">Fourth answer</th>
-                    <th scope="col">Right answer</th>
-                    <th scope="col">Select</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr th:each="list : ${cards}">
-                    <td th:text="${list.getQuestion()}"></td>
-                    <td th:text="${list.getFirstAnswer()}"></td>
-                    <td th:text="${list.getSecondAnswer()}"></td>
-                    <td th:text="${list.getThirdAnswer()}"></td>
-                    <td th:text="${list.getFourthAnswer()}"></td>
-                    <td th:text="${list.getCorrectAnswer()}"></td>
-                    <td><input class="form-check-input" type="checkbox" id="cardCheckbox"
-                               name="cardCheckbox"
-                               th:value="${list.getId()}"></td>
-                    <!-- <td><a th:href="@{'/subcategory/edit'(id=${list.id})}">Edit</a></td> -->
-                </tr>
-
-                </tbody>
-
-            </table>
-
-            <button class="btn btn-outline-secondary" type="submit">Submit</button>
-        </form>
     </div>
-
-</div>
 </div>
 
 <!--Bootstrap JS -->
