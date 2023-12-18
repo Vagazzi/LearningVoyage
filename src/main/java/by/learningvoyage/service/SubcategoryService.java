@@ -19,5 +19,7 @@ public interface SubcategoryService {
     List<Subcategory> getAllSubcategories();
     Subcategory getById(long id);
 
+    List<Subcategory> prepareSubcategories(String role, List<Subcategory> subcategories);
+
     Subcategory save(Subcategory subcategory);
 }
