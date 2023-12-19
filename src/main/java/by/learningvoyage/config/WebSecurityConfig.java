@@ -1,5 +1,6 @@
 package by.learningvoyage.config;
 
+import by.learningvoyage.model.Roles;
 import by.learningvoyage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,21 +29,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                //Доступ только для не зарегистрированных пользователей
                 .antMatchers("/registration").not().fullyAuthenticated()
-                //Доступ только для пользователей с ролью Администратор
-//                .antMatchers("/constructor/**").hasRole("ADMIN")
-//                .antMatchers("/edit/category/**").hasRole("ADMIN")
-//                .antMatchers("/subcategory/edit/**").hasRole("ADMIN")
-                //Доступ разрешен всем пользователей
+                .antMatchers("/constructor/**").hasRole(Roles.ADMIN)
+                .antMatchers("/edit/category/**").hasRole(Roles.ADMIN)
+                .antMatchers("/subcategory/edit/**").hasRole(Roles.ADMIN)
                 .antMatchers("/", "/resources/**").permitAll()
-                //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()
-                //Настройка для входа в систему
                 .formLogin()
                 .loginPage("/login")
-                //Перенарпавление на главную страницу после успешного входа
                 .defaultSuccessUrl("/categories")
                 .permitAll()
                 .and()
