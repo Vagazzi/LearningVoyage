@@ -18,10 +18,8 @@ public class LogoutController {
     @GetMapping("/logout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String login = SecurityContextHolder.getContext().getAuthentication().getName();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
-            log.info("This user was logged out {}", login);
         }
         return "redirect:/login?logout";
 

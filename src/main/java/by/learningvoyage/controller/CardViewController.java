@@ -1,11 +1,16 @@
 package by.learningvoyage.controller;
 
 import by.learningvoyage.model.Card;
+import by.learningvoyage.model.Roles;
 import by.learningvoyage.model.Subcategory;
+import by.learningvoyage.model.User;
+import by.learningvoyage.repository.UserRepository;
 import by.learningvoyage.service.CardService;
 import by.learningvoyage.service.CategoryService;
 import by.learningvoyage.service.SubcategoryService;
+import by.learningvoyage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -32,6 +35,9 @@ public class CardViewController {
     private SubcategoryService subcategoryService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private CardService cardService;
 
     public static int counter = 0;
@@ -40,7 +46,14 @@ public class CardViewController {
     public String showSubcategories(@PathVariable("categoryId") Long id,
                                     Model model) {
 
-        model.addAttribute("subcategory", categoryService.getById(id).getSubcategories());
+
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByLogin(login);
+        String role = Objects.requireNonNull(user.getRoles().stream().findFirst().orElse(null)).getName();
+
+        List<Subcategory> subcategories = subcategoryService.prepareSubcategories(role, categoryService.getById(id).getSubcategories());
+
+        model.addAttribute("subcategory", subcategories);
         model.addAttribute("categoryId", id);
         return "ShowSubcategoriesPage";
     }

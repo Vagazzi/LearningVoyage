@@ -22,7 +22,7 @@ public class Roles implements GrantedAuthority {
     @Transient
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
-    public static final String DEFAULT_USER = "DEFAULT_USER ";
+    public static final String DEFAULT_USER = "DEFAULT_USER";
     public static final String PRIVILEGED_USER = "PRIVILEGED_USER";
     public static final String ADMIN = "ADMIN";
 
