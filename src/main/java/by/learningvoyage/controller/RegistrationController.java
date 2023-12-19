@@ -4,6 +4,7 @@ package by.learningvoyage.controller;
 import by.learningvoyage.model.Roles;
 import by.learningvoyage.model.User;
 import by.learningvoyage.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import java.sql.SQLException;
 import java.util.Set;
 
 @Controller
+@Slf4j
 public class RegistrationController {
     @Autowired
     private UserService userService;
@@ -48,6 +50,8 @@ public class RegistrationController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
+
+        log.info("User {} was created", user);
 
         return "redirect:/";
     }

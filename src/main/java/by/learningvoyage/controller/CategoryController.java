@@ -5,6 +5,7 @@ import by.learningvoyage.model.Category;
 import by.learningvoyage.model.Subcategory;
 import by.learningvoyage.service.CategoryService;
 import by.learningvoyage.service.SubcategoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+@Slf4j
 @Controller
 public class CategoryController {
 
@@ -65,6 +68,7 @@ public class CategoryController {
         category.setSubcategories(subcategories);
 
         categoryService.save(category);
+        log.info("Category {} was edited", category.getCategoryName());
 
         return "redirect:/constructor";
     }

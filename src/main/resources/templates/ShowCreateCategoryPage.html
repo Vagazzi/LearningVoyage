@@ -90,6 +90,9 @@
         <p>
           <input type="file" class="form-control" aria-describedby="inputGroupFileAddon04" required="required" aria-label="Upload"  placeholder="Category picture" name="categoryPicture" id="categoryPicture">
         <p>
+        <label>
+          <input type="checkbox" th:hidden="${errorMessage == 0 ? false: true}"/> <td th:text="${errorMessage}"></td>
+        </label>
           <button class="btn btn-outline-secondary" type="submit">Submit</button>
       </div>
       </form>

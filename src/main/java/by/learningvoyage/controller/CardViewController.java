@@ -33,8 +33,7 @@ public class CardViewController {
     @Autowired
     private SubcategoryService subcategoryService;
 
-    @Autowired
-    private CardService cardService;
+
 
     @GetMapping("/category/{categoryId}")
     public String showSubcategories(@PathVariable("categoryId") Long id,

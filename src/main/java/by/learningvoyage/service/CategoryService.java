@@ -19,7 +19,9 @@ public interface CategoryService {
 
     Category save(Category category);
 
-     Blob castToBlobs(MultipartFile object) throws SQLException, IOException;
+
+
+    Blob castToBlobs(MultipartFile object) throws SQLException, IOException;
 
     Category getById(long id);
 }
