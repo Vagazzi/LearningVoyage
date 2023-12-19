@@ -39,6 +39,15 @@ public class CategoryController {
 
         return "ShowListOfCategories";
     }
+    @GetMapping("/categories")
+    @PreAuthorize("hasRole('DEFAULT_USER')")
+    public String showCategoriesForDefaultUser(Model model) {
+
+        List<Category> categories = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
+
+        return "ShowListOfCategoriesForDefaultUser";
+    }
 
     @GetMapping("/edit/category")
     public String showEditCategoryPage(@RequestParam("id") long id,
