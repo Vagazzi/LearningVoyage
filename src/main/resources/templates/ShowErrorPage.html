@@ -43,71 +43,23 @@
                     <a class="nav-link" href="/constructor" aria-selected="true">Card constructor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">My profile</a>
+                    <a class="nav-link" href="/courses">My profile</a>
                 </li>
-                <div>
-                    <img height="50px" th:src="@{${'/display/avatar'}}" alt="">
-                </div>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About us</a>
+                    <a class="nav-link active" href="/about">About us</a>
                 </li>
                 <div>
                     <a href="/logout">
                         <button class="btn btn-outline-secondary" type="submit" >Logout</button>
                     </a>
                 </div>
-
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="mt-5">
-    <h1 class="text-center">Available categories
-        <style>
-            h1 {
-                color: #000;
-
-                font-feature-settings: 'clig' off, 'liga' off;
-                font-family: Newsreader;
-                font-size: 64px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 120%; /* 76.8px */
-                letter-spacing: -1.28px;
-
-            }
-
-        </style>
-    </h1>
-    <div class="container">
-
-        <table class="table border">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Category Picture</th>
-                <th scope="col">Select</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr th:each="list : ${categories}">
-                <td th:text="${list.getCategoryName()}"></td>
-                <td th:text="${list.getCategoryDescription()}"></td>
-                <td><img height="100px" th:src="@{${'/constructor/display/categoryPicture?id=' + list.getId()}}" alt=""></td>
-
-                <td><a th:href="@{/category/{id}(id=${list.id})}">
-                    <button type="button" class="btn btn-primary">Select</button>
-                </a></td>
-
-            </tr>
-            </tbody>
-
-        </table>
-
-    </div>
+    <h1>Something goes wrong</h1>
 </div>
 
 <!--Bootstrap JS -->

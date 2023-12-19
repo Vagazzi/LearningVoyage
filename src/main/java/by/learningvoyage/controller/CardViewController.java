@@ -24,8 +24,6 @@ import java.util.stream.Collectors;
 @Controller
 public class CardViewController {
 
-    int counterCards = 0;
-
 
     @Autowired
     private CategoryService categoryService;
@@ -33,7 +31,10 @@ public class CardViewController {
     @Autowired
     private SubcategoryService subcategoryService;
 
+    @Autowired
+    private CardService cardService;
 
+    public static int counter = 0;
 
     @GetMapping("/category/{categoryId}")
     public String showSubcategories(@PathVariable("categoryId") Long id,
@@ -48,23 +49,26 @@ public class CardViewController {
     public String showCards(@PathVariable("subcategoryId") Long subcategoryId,
                             @PathVariable("categoryId") Long categoryId,
                             Model model) {
-        model.addAttribute("message", null);
+        List<Card> cards = cardService.getCardsBySubcategoryId(subcategoryId);
 
-        List<Card> cards = new ArrayList<>(subcategoryService.getById(subcategoryId).getCards());
-        model.addAttribute("cards", cards);
-
-        model.addAttribute("cardQuestion", cards.get(counterCards).getQuestion());
-        model.addAttribute("firstAnswer", cards.get(counterCards).getFirstAnswer());
-        model.addAttribute("secondAnswer", cards.get(counterCards).getSecondAnswer());
-        model.addAttribute("thirdAnswer", cards.get(counterCards).getThirdAnswer());
-        model.addAttribute("categoryId", categoryId);
-        model.addAttribute("subcategoryId", subcategoryId);
-        if (counterCards < cards.size()) {
-            counterCards++;
-        } else {
-            model.addAttribute("endingMessage", "It's over! Well done.");
+        if (counter >= cards.size()-1) {
+            model.addAttribute("message", "It's over! Well done.");
+            counter = 0;
             return "/";
         }
+
+        model.addAttribute("message");
+
+        model.addAttribute("cardQuestion", cards.get(counter).getQuestion());
+        model.addAttribute("firstAnswer", cards.get(counter).getFirstAnswer());
+        model.addAttribute("secondAnswer", cards.get(counter).getSecondAnswer());
+        model.addAttribute("thirdAnswer", cards.get(counter).getThirdAnswer());
+        model.addAttribute("categoryId", categoryId);
+        model.addAttribute("cards", cards);
+        model.addAttribute("subcategoryId", subcategoryId);
+
+        counter++;
+
         return "ShowCards";
     }
 
@@ -72,31 +76,33 @@ public class CardViewController {
     public String getAnswer(Model model,
                             @PathVariable("categoryId") Long categoryId,
                             @PathVariable("subcategoryId") Long subcategoryId,
-                            @RequestParam("firstAnswer") String first
-                          /*
-                          @RequestParam("secondAnswer") String second,
-                          @RequestParam("thirdAnswer") String third,
-                          @RequestParam("fourthAnswer") String fourth
-    */) {
+                            @RequestParam(value = "1st", required = false) String first,
+                            @RequestParam(value = "2nd", required = false) String second,
+                            @RequestParam(value = "3rd", required = false) String third,
+                            @RequestParam(value = "4th", required = false) String fourth
+    ) {
 
+        List<Card> cards = cardService.getCardsBySubcategoryId(subcategoryId);
 
-        //, second, third, fourth
-        Subcategory subcategory = subcategoryService.getById(subcategoryId);
-        String[] checkboxParams = new String[]{first};
-        //List<Card> cardFromDb = subcategory.getCards().stream().filter(s -> s.getQuestion().equals("Вилкой в глаз")).collect(Collectors.toList());
-        //model.getAttribute("cardQuestion"
-        List<Card> cardFromDb = List.of(subcategory.getCards().get(0));
-        //Integer correctAnswerId = cardService.getIdFromPage(checkboxParams);
-        Integer correctAnswerId = 1;
-        if (Objects.equals(cardFromDb.get(0).getCorrectAnswerId(), correctAnswerId)) {
-            //ХЗ, как написать)))))
-            // идея в том, что если id с формы равен id правильного ответа, то правильный ответ подсветится зеленым, или около того, иначе - красным
-            // иначе - нет
+        List<String> values = new ArrayList<>();
+        values.add(first);
+        values.add(second);
+        values.add(third);
+        values.add(fourth);
+
+        String answer = cardService.getValueFromCheckboxes(values);
+
+        String correctAnswer = cards.get(counter).getCorrectAnswer();
+
+        if(answer.equals(correctAnswer)){
             model.addAttribute("message", "It's a correct answer!");
-        } else {
-            model.addAttribute("message", "It's uncorrected answer! Right one :" + cardFromDb.get(0).getCorrectAnswer());
+        }
+        else {
+            model.addAttribute("message", "It's uncorrected answer! Right one :" + correctAnswer);
         }
 
-        return "redirect:/category/" + categoryId + "/subcategory/" + subcategoryId;
+
+        //return "redirect:/category/" + categoryId + "/subcategory/" + subcategoryId;
+        return null;
     }
 }

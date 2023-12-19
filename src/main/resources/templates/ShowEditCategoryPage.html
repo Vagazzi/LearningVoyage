@@ -128,7 +128,7 @@
                 <tr th:each="list : ${subcategories}">
                     <td th:text="${list.getSubcategoryName()}"></td>
                     <td th:text="${list.getSubcategoryDescription()}"></td>
-                    <td><img height="250px" th:src="@{${'/display/subcategoryPicture?id=' + list.getId()}}" alt=""></td>
+                    <td><img height="250px" th:src="@{${'/constructor/display/subcategoryPicture?id=' + list.getId()}}" alt=""></td>
                     <td><input class="form-check-input" type="checkbox" id="subcategoryCheckbox"
                                name="subcategoryCheckbox"
                                th:value="${list.getId()}"></td>

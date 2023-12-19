@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ import java.util.Set;
 
 @Controller
 @Slf4j
+@RequestMapping("/registration")
 public class RegistrationController {
     @Autowired
     private UserService userService;
@@ -27,12 +29,12 @@ public class RegistrationController {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @GetMapping("/registration")
+    @GetMapping("/")
     public String registration(Model model) {
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/")
     public String addUser(@RequestParam("login") String login,
                           @RequestParam("password") String password,
                           @RequestParam("avatar") MultipartFile avatar,

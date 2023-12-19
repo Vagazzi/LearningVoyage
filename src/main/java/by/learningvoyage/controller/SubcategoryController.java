@@ -57,7 +57,7 @@ public class SubcategoryController {
         subcategory.setSubcategoryName(subcategoryName);
         subcategory.setSubcategoryDescription(subcategoryDescription);
         subcategory.setSubcategoryPicture(subcategoryService.castToBlobs(subcategoryPicture));
-        subcategory.setAccessLevel(String.valueOf(Roles.DEFAULT_USER));
+        subcategory.setAccessLevel(Roles.DEFAULT_USER);
 
         subcategoryService.create(subcategory);
 

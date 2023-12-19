@@ -43,7 +43,7 @@
                     <a class="nav-link active" href="/constructor" aria-selected="true">Card constructor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/courses">My profile</a>
+                    <a class="nav-link" href="/categories">My profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About us</a>
@@ -98,7 +98,7 @@
                 <td th:text="${list.getCategoryName()}"></td>
                 <td th:text="${list.getCategoryDescription()}"></td>
                 <p>
-                <td><img height="250px" th:src="@{${'/display/categoryPicture?id=' + list.getId()}}" alt=""></td>
+                <td><img height="250px" th:src="@{${'/constructor/display/categoryPicture?id=' + list.getId()}}" alt=""></td>
                 <p>
                 <td><a th:href="@{'edit/category'(id=${list.id})}">Edit</a></td>
             </tr>

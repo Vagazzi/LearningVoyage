@@ -20,4 +20,9 @@ public interface CardService {
     List<Card> getAllCards();
 
     Card findById(long id);
+
+    List<Card> getCardsBySubcategoryId(Long subcategoryId);
+
+    String getValueFromCheckboxes(List<String> values);
+
 }

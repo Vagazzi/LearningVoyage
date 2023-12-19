@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,20 +22,20 @@ import java.util.stream.Collectors;
 
 @Controller
 @Slf4j
+@RequestMapping("/constructor")
 public class CardConstructorController {
 
     @Autowired
     private CategoryService categoryService;
 
-
-    @GetMapping("/constructor")
+    @GetMapping("")
     public String showCardConstructor(Model model){
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
         return "ShowAvailableForEditCategories";
     }
 
-    @GetMapping("/constructor/create")
+    @GetMapping("/create")
     public String showCreateMenu(){
         return "ShowCreateCategoryPage";
     }
@@ -47,7 +48,7 @@ public class CardConstructorController {
     }
 
 
-    @PostMapping("/constructor/create")
+    @PostMapping("/create")
     public String saveCategory(@RequestParam("categoryName") String categoryName,
                                @RequestParam("categoryDescription") String categoryDescription,
                                @RequestParam("categoryPicture") MultipartFile categoryPicture,
@@ -61,11 +62,10 @@ public class CardConstructorController {
         category.setCategoryDescription(categoryDescription);
         category.setCategoryPicture(categoryService.castToBlobs(categoryPicture));
 
-        if(categoryService.getAllCategories().stream()
+        if(!categoryService.getAllCategories().stream()
                 .filter(s->s.getCategoryName().equals(categoryName))
                 .toList()
-                .get(0)
-                .equals(category)) {
+                .isEmpty()) {
             model.addAttribute("errorMessage", "This category exists, try again");
             return "redirect:/constructor/create";
         }

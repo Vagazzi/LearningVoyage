@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +17,9 @@ public class CardServiceImpl implements CardService {
 
     @Autowired
     private CardRepository cardRepository;
+
+    @Autowired
+    private SubcategoryService subcategoryService;
 
     @Override
     public Card create(Card card) {
@@ -29,13 +33,13 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public String getCorrectAnswer(Integer correctAnswerId, Card card) {
-        switch (correctAnswerId){
-            case 1 : return card.getFirstAnswer();
-            case 2 : return card.getSecondAnswer();
-            case 3 : return card.getThirdAnswer();
-            case 4 : return card.getFourthAnswer();
-        }
-        return null;
+        return switch (correctAnswerId) {
+            case 1 -> card.getFirstAnswer();
+            case 2 -> card.getSecondAnswer();
+            case 3 -> card.getThirdAnswer();
+            case 4 -> card.getFourthAnswer();
+            default -> null;
+        };
     }
 
 
@@ -76,6 +80,16 @@ public class CardServiceImpl implements CardService {
     @Override
     public Card findById(long id) {
         return cardRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Card> getCardsBySubcategoryId(Long subcategoryId) {
+        return subcategoryService.getById(subcategoryId).getCards();
+    }
+
+    @Override
+    public String getValueFromCheckboxes(List<String> values) {
+        return values.stream().filter(Objects::nonNull).toString();
     }
 }
 

@@ -33,12 +33,7 @@ public class CategoryController {
     public String showCategories(Model model) {
 
         List<Category> categories = categoryService.getAllCategories();
-        List<List<Subcategory>> subcategories = new ArrayList<>();
         model.addAttribute("categories", categories);
-        for (Category category : categories) {
-            subcategories.add(category.getSubcategories());
-        }
-        model.addAttribute("subcategories", subcategories);
 
         return "ShowListOfCategories";
     }
