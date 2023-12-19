@@ -22,6 +22,7 @@ public class CardController {
     private CardService cardService;
 
     @GetMapping("")
+
     public String showCreateCardPage() {
         return "ShowCreateCardPage";
     }

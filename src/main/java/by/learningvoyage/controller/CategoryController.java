@@ -7,6 +7,7 @@ import by.learningvoyage.service.CategoryService;
 import by.learningvoyage.service.SubcategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class CategoryController {
     private SubcategoryService subcategoryService;
 
     @GetMapping("/categories")
+    @PreAuthorize("hasAnyRole('PRIVILEGED_USER','ADMIN')")
     public String showCategories(Model model) {
 
         List<Category> categories = categoryService.getAllCategories();
