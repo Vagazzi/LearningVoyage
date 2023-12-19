@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  app:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    container_name: app
+    ports:
+      - 7777:7777
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/LearningVoyage
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=vagazzi322
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  db:
+    image: mysql
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: vagazzi322
+      MYSQL_DB: learningvoyage
